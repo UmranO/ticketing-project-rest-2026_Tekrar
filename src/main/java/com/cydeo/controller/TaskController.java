@@ -42,6 +42,11 @@ public class TaskController {
         taskService.delete(taskId);
         return ResponseEntity.ok(new ResponseWrapper("Task is successfully deleted", HttpStatus.OK));
     }
+    @PutMapping
+    public ResponseEntity<ResponseWrapper> updateTask(@RequestBody TaskDTO task){
+        taskService.update(task);
+        return ResponseEntity.ok(new ResponseWrapper("Task is successfully updated", HttpStatus.OK));
+
 
 
 
