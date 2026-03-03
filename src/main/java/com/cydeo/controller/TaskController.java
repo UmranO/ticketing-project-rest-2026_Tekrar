@@ -26,4 +26,11 @@ public class TaskController {
         return ResponseEntity.ok(new ResponseWrapper("Tasks are successfully retrieved",taskDTOList, HttpStatus.OK));
     }
 
+    @GetMapping("/{taskId}")
+    public ResponseEntity<ResponseWrapper> getTaskById(@PathVariable("taskId") Long taskId){
+        TaskDTO task = taskService.findById(taskId);
+        return ResponseEntity.ok(new ResponseWrapper("Task is successfully retrieved",task, HttpStatus.OK));
+    }
+
+
 }
