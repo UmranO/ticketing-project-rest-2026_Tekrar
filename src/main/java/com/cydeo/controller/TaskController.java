@@ -61,7 +61,11 @@ public class TaskController {
         taskService.update(task);
         return ResponseEntity.ok(new ResponseWrapper("Task is successfully updated",HttpStatus.OK));
     }
-
-
+    //Whoever is logged in as Employee can see the Completed tasks assigned to himself.
+    @GetMapping("/employee/archive")
+    public ResponseEntity<ResponseWrapper> employeeArchivedTasks(){
+        List<TaskDTO> taskDTOList = taskService.listAllTasksByStatus(Status.COMPLETE);
+        return ResponseEntity.ok(new ResponseWrapper("Tasks are successfully retrieved",taskDTOList,HttpStatus.OK));
+    }
 
 }
