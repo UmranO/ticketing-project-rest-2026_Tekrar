@@ -55,6 +55,13 @@ public class TaskController {
         return ResponseEntity.ok(new ResponseWrapper("Tasks are successfully retrieved",taskDTOList,HttpStatus.OK));
     }
 
+    //Whoever is logged in as Employee can update the tasks assigned to himself
+    @PutMapping("/employee/update/")
+    public ResponseEntity<ResponseWrapper> employeeUpdateTasks(@RequestBody TaskDTO task){
+        taskService.update(task);
+        return ResponseEntity.ok(new ResponseWrapper("Task is successfully updated",HttpStatus.OK));
+    }
+
 
 
 }
