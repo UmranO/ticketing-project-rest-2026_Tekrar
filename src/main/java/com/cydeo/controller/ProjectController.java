@@ -49,6 +49,18 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponseWrapper("Project is successfully deleted", HttpStatus.OK));
     }
 
+    @GetMapping("/manager/project-status")
+    public ResponseEntity<ResponseWrapper> getProjectByManager(){   //This is for project status page. Whoever is logged
+                                                                    //in as Manager he needs to see all the projects.
+                                                                    //We need an endpoint for that one
+        List<ProjectDTO> projectDTOList = projectService.listAllProjectDetails();
+        return ResponseEntity.ok(new ResponseWrapper("Projects are successfully retrieved",projectDTOList, HttpStatus.OK));
+    }
 
+    @PutMapping("/manager/complete/{projectCode}")
+    public ResponseEntity<ResponseWrapper> managerCompleteProject(@PathVariable("projectCode") String projectCode){ //The manager was able to complete the Projects.
+        projectService.complete(projectCode);
+        return ResponseEntity.ok(new ResponseWrapper("Project is successfully completed", HttpStatus.OK));
+    }
 }
 
