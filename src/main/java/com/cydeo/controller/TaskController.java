@@ -47,6 +47,13 @@ public class TaskController {
         taskService.update(task);
         return ResponseEntity.ok(new ResponseWrapper("Task is successfully updated", HttpStatus.OK));
 
+}
+    //Whoever is logged in as Employee can see all the  tasks assigned to himself.
+    @GetMapping("/employee/pending-tasks")
+    public ResponseEntity<ResponseWrapper> employeePendingTasks(){
+        List<TaskDTO> taskDTOList = taskService.listAllTasksByStatusIsNot(Status.COMPLETE);
+        return ResponseEntity.ok(new ResponseWrapper("Tasks are successfully retrieved",taskDTOList,HttpStatus.OK));
+    }
 
 
 
