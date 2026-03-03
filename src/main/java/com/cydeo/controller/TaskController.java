@@ -31,6 +31,18 @@ public class TaskController {
         TaskDTO task = taskService.findById(taskId);
         return ResponseEntity.ok(new ResponseWrapper("Task is successfully retrieved",task, HttpStatus.OK));
     }
+    @PostMapping
+    public ResponseEntity<ResponseWrapper> createTask(@RequestBody TaskDTO task){
+        taskService.save(task);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper("Task is successfully created",HttpStatus.CREATED));
+    }
+
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity<ResponseWrapper> deleteTask(@PathVariable("taskId") Long taskId){
+        taskService.delete(taskId);
+        return ResponseEntity.ok(new ResponseWrapper("Task is successfully deleted", HttpStatus.OK));
+    }
+
 
 
 }
